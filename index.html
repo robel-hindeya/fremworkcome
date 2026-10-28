@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXO Talent Consultancy — Bridging Ethiopia’s Digital Divide</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#111111}a:hover{color:#555555}
+*{box-sizing:border-box}
+.hero-bg{background-image:url(./assets/74e3cd9716a56e6d52307b5ebaacfdd7.png);background-size:100% 100%;background-repeat:no-repeat;background-position:center;transform-origin:center;animation:heroBreath 9s ease-in-out infinite alternate}
+.hero-bg::before,.hero-bg::after{content:"";position:absolute;inset:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 18%,transparent 40%,transparent 60%,#000 82%,#000 100%),linear-gradient(180deg,transparent 8%,#000 35%,#000 70%,transparent 95%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#000 0%,#000 18%,transparent 40%,transparent 60%,#000 82%,#000 100%),linear-gradient(180deg,transparent 8%,#000 35%,#000 70%,transparent 95%);mask-composite:intersect}
+.hero-bg::before{background:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0 38px,rgba(255,255,255,.6) 38px 40px);animation:grillDrift 7s linear infinite}
+.hero-bg::after{background:repeating-linear-gradient(90deg,rgba(74,144,226,0) 0 56px,rgba(74,144,226,.18) 56px 70px);animation:grillDrift 11s linear infinite reverse}
+@keyframes heroBreath{0%{transform:scaleX(1);opacity:.85}100%{transform:scaleX(1.08);opacity:1}}
+@keyframes grillDrift{from{background-position:0 0}to{background-position:280px 0}}
+@keyframes vInR1{from{translate:64px 0;opacity:0;filter:blur(4px)}to{translate:0 0;filter:blur(0)}}
+@keyframes vInR2{from{translate:64px 0;opacity:0;filter:blur(4px)}to{translate:0 0;filter:blur(0)}}
+@keyframes vInL1{from{translate:-64px 0;opacity:0;filter:blur(4px)}to{translate:0 0;filter:blur(0)}}
+@keyframes vInL2{from{translate:-64px 0;opacity:0;filter:blur(4px)}to{translate:0 0;filter:blur(0)}}
+.v-r1{animation:vInR1 0.6s cubic-bezier(.2,.8,.2,1) both}
+.v-r2{animation:vInR2 0.6s cubic-bezier(.2,.8,.2,1) both}
+.v-l1{animation:vInL1 0.6s cubic-bezier(.2,.8,.2,1) both}
+.v-l2{animation:vInL2 0.6s cubic-bezier(.2,.8,.2,1) both}
+.tm-card{box-sizing:border-box;display:flex;flex-direction:column;gap:14px;border-radius:8px;text-align:left}
+.tm-card:focus-visible{outline:2px solid #4A90E2;outline-offset:6px}
+.tm-photo{transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.tm-card:hover .tm-photo,.tm-card:focus-visible .tm-photo{transform:translateY(-6px);box-shadow:0 22px 44px rgba(17,17,17,.22)}
+.tm-ini{transition:transform .7s cubic-bezier(.2,.8,.2,1),color .5s}
+.tm-card:hover .tm-ini{transform:scale(1.12);color:#9A9A9A}
+.tm-view{opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.tm-card:hover .tm-view,.tm-card:focus-visible .tm-view{opacity:1;transform:translateY(0)}
+.tm-name{background-image:linear-gradient(#111,#111);background-size:0 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .4s}
+.tm-card:hover .tm-name{background-size:100% 1px}
+@keyframes tmFade{from{opacity:0}to{opacity:1}}
+@keyframes tmIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.tm-overlay{animation:tmFade .3s ease both}
+.tm-modal{animation:tmIn .45s cubic-bezier(.2,.8,.2,1) both}
+.ct-in{width:100%;box-sizing:border-box;font:inherit;font-size:15px;color:#111111;background:#F7F7F8;border:1px solid #E2E2E2;border-radius:12px;padding:13px 16px;min-height:48px;transition:border-color .2s,box-shadow .2s,background .2s}
+.ct-in::placeholder{color:#6B6B6B}
+.ct-in:focus{outline:none;background:#FFFFFF;border-color:#4A90E2;box-shadow:0 0 0 4px rgba(74,144,226,.15)}
+.ct-send{transition:transform .2s,background .2s}.ct-send:hover{background:#2A2A2A}.ct-send:active{transform:scale(.99)}
+.ct-tab{transition:background .3s,color .3s,box-shadow .3s}
+@keyframes ctIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ct-pane{animation:ctIn .35s ease both}
+@media (prefers-reduced-motion: reduce){.ct-pane{animation:none}}
+.tex-wrap{position:relative;isolation:isolate;background:#FAFAFB}
+.tex{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.tex::before{content:"";position:absolute;left:0;right:0;top:-1600px;bottom:0;background-image:radial-gradient(circle,rgba(17,17,17,.10) 1px,transparent 1.5px);background-size:22px 22px;transform:translate3d(0,calc(var(--sy,0px) * 0.25),0);animation:texDrift 40s linear infinite;will-change:transform}
+.tex::after{content:"";position:absolute;left:-10%;right:-10%;top:-1600px;bottom:0;background-image:radial-gradient(620px 420px at 12% 18%,rgba(74,144,226,.13),transparent 70%),radial-gradient(540px 540px at 88% 52%,rgba(74,144,226,.10),transparent 70%),radial-gradient(720px 500px at 35% 86%,rgba(74,144,226,.09),transparent 70%);background-size:100% 1500px;background-repeat:repeat-y;transform:translate3d(0,calc(var(--sy,0px) * 0.12),0);animation:texFloat 16s ease-in-out infinite alternate;will-change:transform}
+@keyframes texDrift{to{background-position:220px 264px}}
+@keyframes texFloat{0%{translate:0 0}50%{translate:4% -60px}100%{translate:-3% 40px}}
+@media (prefers-reduced-motion: reduce){.tex::before,.tex::after{animation:none;transform:none}}
+.ft-arrow{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.ft-cta:hover .ft-arrow{transform:rotate(45deg) scale(1.08)}
+.gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:20px;height:clamp(420px,36vw,520px)}
+.gal-big{grid-row:1 / span 2}
+.gal-tile{position:relative;overflow:hidden;border-radius:18px;background:#EDEDED;margin:0}
+.gal-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.gal-tile:hover img{transform:scale(1.06)}
+@media (max-width:760px){.gal{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto}.gal-big{grid-column:1 / -1;grid-row:auto;aspect-ratio:4 / 3}.gal-tile:not(.gal-big){aspect-ratio:1 / 1}}
+@media (prefers-reduced-motion: reduce){.gal-tile img{transition:none}}
+@media (prefers-reduced-motion: reduce){.tm-photo,.tm-ini,.tm-view,.tm-name{transition:none}.tm-overlay,.tm-modal{animation:none}}
+@media (prefers-reduced-motion: reduce){.hero-bg,.hero-bg::before,.hero-bg::after,.v-r1,.v-r2,.v-l1,.v-l2{animation:none}}
+@keyframes mMenuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.m-menu{animation:mMenuIn .25s ease both}
+@media (min-width:761px){.m-menu{display:none !important}}
+@media (max-width:760px){
+.nav-desk{display:none !important}
+.nav-burger{display:inline-flex !important}
+.hero{min-height:min(calc(100vh - 92px), 900px) !important;min-height:min(calc(100svh - 92px), 900px) !important;justify-content:flex-start !important;padding:24px 16px 32px !important}
+.hero-main{margin-top:auto}
+.hero-main h1{font-size:clamp(40px, 11vw, 56px) !important}
+.hero-logos{position:static !important;margin-top:auto !important;justify-content:center !important;gap:14px 22px !important;padding:48px 0 0 !important}
+.hero-logos > span{font-size:13px !important}
+.tex-wrap section > div{padding-top:72px !important;padding-bottom:72px !important}
+.m-stats{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important}
+.m-stat{min-height:0 !important;gap:28px !important;padding:20px !important}
+.m-step{min-height:0 !important;gap:24px !important;padding:28px 22px !important}
+.wd-row{grid-template-columns:28px minmax(0,1fr) !important;column-gap:14px !important;row-gap:14px !important;padding:20px 12px !important;align-items:start !important}
+.wd-c{grid-column:1;grid-row:1 / span 2;padding-top:21px}
+.wd-l,.wd-r{grid-column:2;justify-content:flex-start !important}
+.wd-a .wd-l{grid-row:1}.wd-a .wd-r{grid-row:2}
+.wd-b .wd-r{grid-row:1}.wd-b .wd-l{grid-row:2}
+.wd-tr{text-align:left !important}
+.wd-line{left:26px !important;top:52px !important}
+.v-side{display:none !important}
+.m-team{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:14px !important}
+.m-team .tm-ini{font-size:34px !important}
+.m-team .tm-name{font-size:16px !important}
+.tm-role{left:8px !important;right:8px !important;bottom:8px !important;font-size:9px !important;padding:5px 7px !important;width:fit-content}
+.tm-tag{display:none}
+}
+</style>
+</helmet>
+<div style="font-family: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; color: #111111; background: #FFFFFF; width: 100%; overflow: hidden">
+
+<!-- NAV -->
+<header style="max-width: 1440px; margin: 0 auto; padding: 24px clamp(16px, 4vw, 48px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; position: relative; z-index: 2">
+<a href="#top" style="font-size: 20px; font-weight: 500; letter-spacing: -0.02em; text-decoration: none">EXO Talent</a>
+<nav class="nav-desk" aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: clamp(16px, 2.4vw, 36px); font-size: 14px">
+<a href="#top" style="text-decoration: none">Home</a>
+<a href="#approach" style="text-decoration: none">Approach</a>
+<a href="#what-we-do" style="text-decoration: none">Services</a>
+<a href="#team" style="text-decoration: none">Team</a>
+<a href="#get-in-touch" style="text-decoration: none">Contact</a>
+</nav>
+<a class="nav-desk" href="#get-in-touch" style="background: #111111; color: #FFFFFF; text-decoration: none; font-size: 14px; padding: 12px 22px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center">Book a consultation</a>
+<button type="button" class="nav-burger" onClick="{{toggleMenu}}" aria-expanded="{{menuExp}}" aria-label="Menu" style="display: none; width: 44px; height: 44px; border-radius: 999px; border: 1px solid #E2E2E2; background: #FFFFFF; color: #111111; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="{{menuIcon}}"></path></svg></button>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+<nav class="m-menu" aria-label="Mobile" style="position: absolute; top: 80px; left: 16px; right: 16px; z-index: 20; background: #FFFFFF; border: 1px solid #EAEAEA; border-radius: 20px; box-shadow: 0 20px 50px rgba(17,17,17,0.12); padding: 10px; display: flex; flex-direction: column">
+<a href="#top" onClick="{{closeMenu}}" style="text-decoration: none; font-size: 17px; padding: 14px 14px; border-radius: 12px">Home</a>
+<a href="#approach" onClick="{{closeMenu}}" style="text-decoration: none; font-size: 17px; padding: 14px 14px; border-radius: 12px">Approach</a>
+<a href="#what-we-do" onClick="{{closeMenu}}" style="text-decoration: none; font-size: 17px; padding: 14px 14px; border-radius: 12px">Services</a>
+<a href="#team" onClick="{{closeMenu}}" style="text-decoration: none; font-size: 17px; padding: 14px 14px; border-radius: 12px">Team</a>
+<a href="#get-in-touch" onClick="{{closeMenu}}" style="text-decoration: none; font-size: 17px; padding: 14px 14px; border-radius: 12px">Contact</a>
+<a href="#get-in-touch" onClick="{{closeMenu}}" style="margin-top: 6px; background: #111111; color: #FFFFFF; text-decoration: none; font-size: 15px; min-height: 50px; border-radius: 999px; display: flex; align-items: center; justify-content: center">Book a consultation</a>
+</nav>
+</sc-if>
+</header>
+
+<!-- HERO -->
+<section id="top" class="hero" style="position: relative; min-height: 620px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; padding: 72px 16px 140px">
+<!-- blue light-stripe background -->
+<div class="hero-bg" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none"></div>
+
+<div class="hero-main" style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px; max-width: 1180px; width: 100%">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B6B">EXO Talent Consultancy</p>
+<h1 style="margin: 0; font-weight: 400; font-size: clamp(36px, 5vw, 72px); line-height: 1.04; letter-spacing: -0.035em; text-wrap: balance"><span style="color: #8A8A8A">Bridging Ethiopia’s digital divide</span><br>with skills that last.</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px">
+<a href="#what-we-do" style="background: #111111; color: #FFFFFF; text-decoration: none; font-size: 15px; padding: 14px 26px; border-radius: 999px; min-height: 44px; display: inline-flex; align-items: center; gap: 10px">View services<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a href="#get-in-touch" style="background: #FFFFFF; color: #111111; text-decoration: none; font-size: 15px; padding: 14px 26px; border-radius: 999px; border: 1px solid #D4D4D4; min-height: 44px; display: inline-flex; align-items: center">Get in touch</a>
+</div>
+</div>
+
+<div class="hero-logos" style="position: absolute; left: 0; right: 0; bottom: 32px; padding: 0 clamp(16px, 4vw, 48px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 32px; z-index: 1" aria-label="Clients">
+<sc-for list="{{logos}}" as="lg" hint-placeholder-count="10">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #6B6B6B"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: #6B6B6B"></span>{{lg.name}}</span>
+</sc-for>
+</div>
+</section>
+
+<div id="tex-wrap" class="tex-wrap">
+<div id="tex" class="tex" aria-hidden="true"></div>
+<!-- ABOUT -->
+<section id="about">
+<div style="max-width: 1240px; margin: 0 auto; padding: 112px clamp(16px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 32px 48px">
+<div style="flex: 1 1 200px; max-width: 260px">
+<p style="margin: 0; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B6B"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 999px; background: #84CC16"></span>About us</p>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 56px">
+<h2 style="margin: 0; font-weight: 500; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.2; letter-spacing: -0.025em; color: #111111; max-width: 900px">We work with young people, women, communities and the organisations that back them, building digital skills and solutions that become lasting livelihoods.</h2>
+<div class="m-stats" ref="{{setStatsEl}}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px">
+<sc-for list="{{stats}}" as="st" hint-placeholder-count="3">
+<div class="m-stat" style="background: #F6F6F6; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 56px; min-height: 300px">
+<span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 999px; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; color: #111111">
+<sc-if value="{{st.isCalendar}}" hint-placeholder-val="{{false}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg></sc-if>
+<sc-if value="{{st.isSectors}}" hint-placeholder-val="{{false}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 13h18"></path></svg></sc-if>
+<sc-if value="{{st.isPeople}}" hint-placeholder-val="{{false}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c1-3.5 4-5 7-5s6 1.5 7 5"></path></svg></sc-if>
+<sc-if value="{{st.isGrowth}}" hint-placeholder-val="{{false}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 4 4 7-7"></path><path d="M15 9h5v5"></path></svg></sc-if>
+<sc-if value="{{st.isPartner}}" hint-placeholder-val="{{false}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M8 12h8M12 8v8"></path></svg></sc-if>
+</span>
+<div style="display: flex; flex-direction: column; gap: 14px; margin-top: auto">
+<span style="font-size: clamp(36px, 3.4vw, 48px); font-weight: 500; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">{{st.value}}</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A4A4A; max-width: 260px">{{st.label}}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach" style="border-top: 1px solid #EAEAEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px clamp(16px, 4vw, 48px); display: flex; flex-direction: column; gap: 64px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 620px">
+<p style="margin: 0; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B6B">How it works</p>
+<h2 style="margin: 0; font-weight: 400; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.05; letter-spacing: -0.03em">From capability to <span style="color: #8A8A8A">lasting livelihoods</span></h2>
+</div>
+<p style="margin: 0; max-width: 360px; font-size: 16px; line-height: 1.55; color: #4A4A4A">A practical, safeguarding-first journey that meets people where they are and connects them to real opportunity.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: #EAEAEA; border: 1px solid #EAEAEA">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+<div class="m-step" style="background: #FFFFFF; padding: 36px 28px; display: flex; flex-direction: column; gap: 56px; min-height: 280px">
+<span style="font-size: 13px; color: #6B6B6B">{{s.n}}</span>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-weight: 500; font-size: 22px; letter-spacing: -0.02em">{{s.title}}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4A4A">{{s.body}}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- WHAT WE DO -->
+<section id="what-we-do" style="border-top: 1px solid #EAEAEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px clamp(16px, 4vw, 48px); display: flex; flex-direction: column; gap: 64px">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; max-width: 680px; margin: 0 auto">
+<p style="margin: 0; display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px; background: #F3F3F3; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #4A4A4A"><span style="color: #8A8A8A">04</span><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 999px; background: #111111"></span>What we do</p>
+<h2 style="margin: 0; font-weight: 400; font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.035em; text-wrap: balance">Seven core <span style="color: #8A8A8A">service areas</span></h2>
+<p style="margin: 0; max-width: 520px; font-size: 16px; line-height: 1.55; color: #4A4A4A">Each one designed to turn digital capability into dignified, sustainable work for people, enterprises and communities.</p>
+</div>
+<div id="wwd-timeline" ref="{{setWwdEl}}" style="position: relative; width: 100%; max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px">
+<div class="wd-line" aria-hidden="true" style="position: absolute; left: 50%; top: 64px; bottom: 64px; width: 2px; margin-left: -1px; background: #EDEDED; border-radius: 2px"></div>
+<div class="wd-line" aria-hidden="true" style="position: absolute; left: 50%; top: 64px; width: 2px; margin-left: -1px; height: {{wlineH}}; background: #4A90E2; border-radius: 2px; transition: height 0.12s linear"></div>
+<sc-for list="{{wsteps}}" as="s" hint-placeholder-count="7">
+<div id="wwd-row-{{s.n}}" class="wd-row {{s.side}}" style="position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr); align-items: center; gap: clamp(12px, 3vw, 40px); padding: 32px clamp(12px, 3vw, 40px); border-radius: 28px; background: {{s.rowBg}}; transition: background 0.6s ease">
+<div class="wd-l" style="display: flex; justify-content: flex-end; min-width: 0">
+<sc-if value="{{s.iconLeft}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; align-items: center; gap: 14px">
+<span aria-hidden="true" style="width: 64px; height: 64px; border-radius: 20px; background: {{s.tileBg}}; color: {{s.tileColor}}; border: 1px solid {{s.tileBorder}}; box-shadow: 0 6px 18px rgba(17,17,17,0.08); display: inline-flex; align-items: center; justify-content: center; transition: background 0.6s, color 0.6s"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{s.d1}}"></path><path d="{{s.d2}}"></path></svg></span>
+<button type="button" onClick="{{s.pick}}" aria-label="Show step {{s.n}}: {{s.title}}" style="min-width: 44px; height: 44px; border-radius: 999px; border: 1px solid #E2E2E2; background: #FFFFFF; font: inherit; font-size: 13px; color: #111111; cursor: pointer">{{s.n}}</button>
+</div>
+</sc-if>
+<sc-if value="{{s.textLeft}}" hint-placeholder-val="{{false}}">
+<div class="wd-tr" style="display: flex; flex-direction: column; gap: 8px; text-align: right; max-width: 340px">
+<h3 style="margin: 0; font-weight: 500; font-size: clamp(17px, 1.6vw, 21px); letter-spacing: -0.02em">{{s.title}}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4A4A">{{s.body}}</p>
+</div>
+</sc-if>
+</div>
+<div class="wd-c" style="display: flex; justify-content: center">
+<span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 999px; background: #FFFFFF; border: 2px solid {{s.dotRing}}; display: inline-flex; align-items: center; justify-content: center; position: relative; z-index: 1; transition: border-color 0.6s"><span style="width: 8px; height: 8px; border-radius: 999px; background: {{s.dotFill}}; transition: background 0.6s"></span></span>
+</div>
+<div class="wd-r" style="display: flex; justify-content: flex-start; min-width: 0">
+<sc-if value="{{s.iconLeft}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 340px">
+<h3 style="margin: 0; font-weight: 500; font-size: clamp(17px, 1.6vw, 21px); letter-spacing: -0.02em">{{s.title}}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4A4A">{{s.body}}</p>
+</div>
+</sc-if>
+<sc-if value="{{s.textLeft}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; align-items: center; gap: 14px">
+<button type="button" onClick="{{s.pick}}" aria-label="Show step {{s.n}}: {{s.title}}" style="min-width: 44px; height: 44px; border-radius: 999px; border: 1px solid #E2E2E2; background: #FFFFFF; font: inherit; font-size: 13px; color: #111111; cursor: pointer">{{s.n}}</button>
+<span aria-hidden="true" style="width: 64px; height: 64px; border-radius: 20px; background: {{s.tileBg}}; color: {{s.tileColor}}; border: 1px solid {{s.tileBorder}}; box-shadow: 0 6px 18px rgba(17,17,17,0.08); display: inline-flex; align-items: center; justify-content: center; transition: background 0.6s, color 0.6s"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{s.d1}}"></path><path d="{{s.d2}}"></path></svg></span>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- VOICES -->
+<section id="voices" style="border-top: 1px solid #EAEAEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px clamp(16px, 4vw, 48px); display: flex; flex-direction: column; gap: 64px">
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center">
+<p style="margin: 0; display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px; background: #FFFFFF; border: 1px solid #EAEAEA; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #4A4A4A"><span style="color: #8A8A8A">05</span><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 999px; background: #111111"></span>Voices</p>
+<h2 style="margin: 0; font-weight: 400; font-size: clamp(40px, 6vw, 88px); line-height: 0.98; letter-spacing: -0.04em; display: flex; flex-direction: column; width: fit-content; max-width: 100%"><span style="color: #9A9A9A; font-size: 0.5em; letter-spacing: -0.02em">What</span><span style="color: #8A8A8A">participants +</span><span style="color: #111111; padding-left: clamp(24px, 6vw, 110px)">partners say</span></h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center">
+<sc-for list="{{vcards}}" as="v" hint-placeholder-count="3">
+<article class="{{v.anim}} {{v.side}}" style="animation-delay: {{v.delay}}; flex: 1 1 300px; max-width: 400px; min-height: 340px; background: {{v.bg}}; border: 1px solid #EAEAEA; border-radius: 24px; padding: 36px 32px; display: flex; flex-direction: column; gap: 18px; box-shadow: {{v.shadow}}; transform: scale({{v.scale}}); transition: background 0.5s, box-shadow 0.5s, transform 0.5s, opacity 0.5s; opacity: {{v.opacity}}">
+<h3 style="margin: 0; font-weight: 400; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.1; letter-spacing: -0.03em; color: {{v.titleColor}}; transition: color 0.5s">“{{v.title}}”</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: {{v.bodyColor}}; transition: color 0.5s">{{v.quote}}</p>
+<div style="margin-top: auto; display: flex; align-items: center; gap: 14px; padding-top: 18px">
+<span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 999px; background: {{v.avatarBg}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500">{{v.initials}}</span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 500; color: {{v.titleColor}}">{{v.name}}</span>
+<span style="font-size: 14px; color: #6B6B6B">{{v.role}}</span>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: center; gap: 10px">
+<button type="button" onClick="{{prevV}}" aria-label="Previous testimonial" style="width: 48px; height: 48px; border-radius: 14px; border: 1px solid #E2E2E2; background: #FFFFFF; color: #111111; display: inline-flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
+<button type="button" onClick="{{nextV}}" aria-label="Next testimonial" style="width: 48px; height: 48px; border-radius: 14px; border: 1px solid #E2E2E2; background: #FFFFFF; color: #111111; display: inline-flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</section>
+
+<!-- TEAM -->
+<section id="team" style="border-top: 1px solid #EAEAEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px clamp(16px, 4vw, 48px); display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+<p style="margin: 0; display: inline-flex; align-items: center; gap: 10px; width: fit-content; padding: 6px 14px; border-radius: 999px; background: #F3F3F3; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #4A4A4A"><span style="color: #8A8A8A">06</span><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 999px; background: #111111"></span>Our team</p>
+<h2 style="margin: 0; font-weight: 400; font-size: clamp(32px, 3.8vw, 54px); line-height: 1.05; letter-spacing: -0.035em"><span style="color: #8A8A8A">Leadership with development</span><br>and delivery depth</h2>
+</div>
+<p style="margin: 0; max-width: 380px; font-size: 16px; line-height: 1.55; color: #4A4A4A">The people leading EXO’s programmes, partnerships and delivery across Ethiopia.</p>
+</div>
+<div class="m-team" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px">
+<sc-for list="{{team}}" as="m" hint-placeholder-count="4">
+<article style="display: flex; flex-direction: column; gap: 6px">
+<div class="tm-card">
+<div class="tm-photo" style="position: relative; width: 100%; aspect-ratio: 3 / 4; border-radius: 6px; overflow: hidden; background: radial-gradient(ellipse 70% 60% at 50% 38%, #3A3A3A 0%, #1C1C1C 70%); display: flex; align-items: center; justify-content: center">
+<span class="tm-ini" aria-hidden="true" style="font-size: 56px; font-weight: 300; letter-spacing: -0.03em; color: #6E6E6E">{{m.initials}}</span>
+<span class="tm-tag" style="position: absolute; top: 14px; right: 14px; font-size: 11px; color: #9A9A9A">[Photo]</span>
+<span class="tm-role" style="position: absolute; left: 14px; bottom: 14px; padding: 6px 10px; border-radius: 4px; background: rgba(17,17,17,0.72); color: #FFFFFF; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase">{{m.role}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 4px">
+<span class="tm-name" style="width: fit-content; font-weight: 500; font-size: 19px; letter-spacing: -0.02em; color: #111111">{{m.name}}</span>
+<span style="font-size: 14px; line-height: 1.5; color: #6B6B6B">[Short bio: one line on their background and focus.]</span>
+</div>
+</div>
+<div style="display: flex; gap: 4px; margin-left: -6px">
+<a href="#team" aria-label="{{m.name}} on LinkedIn" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #8A8A8A"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"></path></svg></a>
+<a href="#team" aria-label="Email {{m.name}}" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #8A8A8A"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></a>
+</div>
+</article></sc-for></div>
+
+
+</div>
+</section></div>
+
+
+<!-- GALLERY -->
+<section id="gallery" aria-label="EXO in action" style="border-top: 1px solid #EAEAEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 80px clamp(16px, 4vw, 48px)">
+<div class="gal">
+<figure class="gal-tile gal-big"><img src="./assets/0f3546cfaa9f69fd088aac12c37f1b65.jpg" alt="Four young people smiling and working together over a tablet and laptop"></figure>
+<figure class="gal-tile"><img src="./assets/d6343d1667348ddc8312a9d285ca5c03.jpg" alt="A small team gathered around a laptop, reviewing work together"></figure>
+<figure class="gal-tile"><img src="./assets/f7d2538486b05f690af7049d1336078f.jpg" alt="People working at desks in a bright open-plan office"></figure>
+<figure class="gal-tile"><img src="./assets/9345a09cc8c18a425d9864605e850df7.jpg" alt="Learners at a shared table with laptops in front of a wall of sticky notes"></figure>
+<figure class="gal-tile"><img src="./assets/e66e749634b22675109c2fb3cc3ce9eb.jpg" alt="A facilitator presenting to participants seated around a meeting table"></figure>
+</div>
+</div>
+</section>
+
+<!-- CONTACT FORM -->
+<section id="get-in-touch" style="border-top: 1px solid #EAEAEA">
+<div style="max-width: 1240px; margin: 0 auto; padding: 120px clamp(16px, 4vw, 48px); display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px">
+<p style="margin: 0; display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px; background: #FFFFFF; border: 1px solid #EAEAEA; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #4A4A4A"><span style="color: #8A8A8A">07</span><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 999px; background: #111111"></span>Contact</p>
+<h2 style="margin: 0; font-weight: 400; font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.035em">Get in <span style="color: #8A8A8A">touch</span></h2>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+
+<div style="flex: 999 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #EAEAEA; border-radius: 24px; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 22px">
+<div role="tablist" aria-label="Contact options" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 999px; background: #F0F0F1">
+<button type="button" role="tab" class="ct-tab" aria-selected="{{ctMsgSel}}" onClick="{{tabMsg}}" style="min-height: 44px; border: 0; border-radius: 999px; font: inherit; font-size: 15px; cursor: pointer; background: {{ctMsgBg}}; color: {{ctMsgColor}}; box-shadow: {{ctMsgShadow}}">Send a message</button>
+<button type="button" role="tab" class="ct-tab" aria-selected="{{ctBookSel}}" onClick="{{tabBook}}" style="min-height: 44px; border: 0; border-radius: 999px; font: inherit; font-size: 15px; cursor: pointer; background: {{ctBookBg}}; color: {{ctBookColor}}; box-shadow: {{ctBookShadow}}">Book appointment</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ct-name" style="font-size: 14px; color: #3A3A3A">Full name</label>
+<input id="ct-name" class="ct-in" type="text" autocomplete="name" placeholder="Your name" onChange="{{onName}}">
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ct-email" style="font-size: 14px; color: #3A3A3A">Email</label>
+<input id="ct-email" class="ct-in" type="email" autocomplete="email" placeholder="you@example.com" onChange="{{onEmail}}">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ct-phone" style="font-size: 14px; color: #3A3A3A">Phone <span style="color: #6B6B6B">(optional)</span></label>
+<input id="ct-phone" class="ct-in" type="tel" autocomplete="tel" placeholder="+251 ..." onChange="{{onPhone}}">
+</div>
+</div>
+<sc-if value="{{ctIsMsg}}" hint-placeholder-val="{{true}}">
+<div class="ct-pane" style="display: flex; flex-direction: column; gap: 8px">
+<label for="ct-msg" style="font-size: 14px; color: #3A3A3A">Message</label>
+<textarea id="ct-msg" class="ct-in" rows="5" placeholder="How can we help?" onChange="{{onMsg}}" style="resize: vertical"></textarea>
+</div>
+</sc-if>
+<sc-if value="{{ctIsBook}}" hint-placeholder-val="{{false}}">
+<div class="ct-pane" style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ct-date" style="font-size: 14px; color: #3A3A3A">Preferred date</label>
+<input id="ct-date" class="ct-in" type="date" onChange="{{onDate}}">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ct-time" style="font-size: 14px; color: #3A3A3A">Preferred time</label>
+<input id="ct-time" class="ct-in" type="time" onChange="{{onTime}}">
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ct-topic" style="font-size: 14px; color: #3A3A3A">What would you like to discuss?</label>
+<select id="ct-topic" class="ct-in" onChange="{{onTopic}}">
+<option value="">Choose a service</option>
+<option>Driving Digital Learning</option>
+<option>Development &amp; Skills Building</option>
+<option>Apprenticeship &amp; Job Creation</option>
+<option>Job Creation Support</option>
+<option>Access to Finance Solutions</option>
+<option>Enterprise Development Services</option>
+<option>ICT Skills Training</option>
+<option>Something else</option>
+</select>
+</div>
+</div>
+</sc-if>
+<button type="button" class="ct-send" onClick="{{sendForm}}" style="min-height: 52px; border: 0; border-radius: 999px; background: #111111; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer">{{ctSendLabel}}<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+<p aria-live="polite" style="margin: 0; text-align: center; font-size: 13px; color: #6B6B6B">{{ctNote}}</p>
+</div>
+
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<div style="background: #FFFFFF; border: 1px solid #EAEAEA; border-radius: 24px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 22px">
+<h3 style="margin: 0; font-weight: 500; font-size: 24px; letter-spacing: -0.02em">Reach us directly</h3>
+<a href="tel:+251922147227" style="display: flex; gap: 16px; align-items: center; text-decoration: none">
+<span aria-hidden="true" style="flex: 0 0 auto; width: 48px; height: 48px; border-radius: 14px; border: 1px solid #EAEAEA; background: #F7F7F8; display: inline-flex; align-items: center; justify-content: center; color: #111111"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B6B">Phone</span><span style="font-size: 17px; color: #111111">+251 922 147 227</span></span>
+</a>
+<a href="mailto:info@exotalentafrica.com" style="display: flex; gap: 16px; align-items: center; text-decoration: none">
+<span aria-hidden="true" style="flex: 0 0 auto; width: 48px; height: 48px; border-radius: 14px; border: 1px solid #EAEAEA; background: #F7F7F8; display: inline-flex; align-items: center; justify-content: center; color: #111111"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B6B">Email</span><span style="font-size: 17px; color: #111111; overflow-wrap: anywhere">info@exotalentafrica.com</span></span>
+</a>
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<span aria-hidden="true" style="flex: 0 0 auto; width: 48px; height: 48px; border-radius: 14px; border: 1px solid #EAEAEA; background: #F7F7F8; display: inline-flex; align-items: center; justify-content: center; color: #111111"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+<span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B6B">Address</span><span style="font-size: 17px; line-height: 1.45; color: #111111">Kazanchis, Bloom Tower, Addis Ababa, Ethiopia</span></span>
+</div>
+</div>
+<div style="background: #111111; color: #FFFFFF; border-radius: 24px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0 0 8px; font-weight: 500; font-size: 24px; letter-spacing: -0.02em">Business hours</h3>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 16px 0; border-bottom: 1px solid #2E2E2E"><span style="color: #BDBDBD">Monday to Friday</span><span style="font-weight: 500">9:00am to 10:00pm</span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 16px 0; border-bottom: 1px solid #2E2E2E"><span style="color: #BDBDBD">Saturday</span><span style="font-weight: 500">9:00am to 12:00am</span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 16px 0"><span style="color: #BDBDBD">Sunday</span><span style="font-weight: 500">9:00am to 12:00pm</span></div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer style="background: #FFFFFF; padding: 24px clamp(12px, 2vw, 24px) 0">
+<div style="max-width: 1440px; margin: 0 auto; background: #F3F3F3; border-radius: clamp(28px, 4vw, 56px); overflow: hidden; display: flex; flex-direction: column">
+<div style="padding: clamp(40px, 5vw, 64px) clamp(20px, 7vw, 104px) 0; display: flex; flex-wrap: wrap; gap: 40px 48px">
+<p style="margin: 0; flex: 2 1 280px; max-width: 360px; font-size: clamp(20px, 1.7vw, 24px); line-height: 1.3; letter-spacing: -0.02em; color: #111111; font-weight: 500">EXO Talent Consultancy bridges Ethiopia’s digital divide with skills that last.</p>
+<nav aria-label="Footer" style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 10px; font-size: 14px">
+<span style="color: #111111; font-size: 15px; margin-bottom: 4px">Explore</span>
+<a href="#about" style="color: #6B6B6B; text-decoration: none">About us</a>
+<a href="#approach" style="color: #6B6B6B; text-decoration: none">How it works</a>
+<a href="#what-we-do" style="color: #6B6B6B; text-decoration: none">What we do</a>
+<a href="#team" style="color: #6B6B6B; text-decoration: none">Team</a>
+<a href="#get-in-touch" style="color: #6B6B6B; text-decoration: none">Contact</a>
+</nav>
+<div style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 12px">
+<span style="color: #111111; font-size: 15px">Follow us</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="#top" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E6E6E6; font-size: 13px; color: #111111; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"></path></svg>LinkedIn</a>
+<a href="#top" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E6E6E6; font-size: 13px; color: #111111; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"></path></svg>Facebook</a>
+<a href="#top" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E6E6E6; font-size: 13px; color: #111111; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17.5 6.5v.01"></path></svg>Instagram</a>
+<a href="#top" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E6E6E6; font-size: 13px; color: #111111; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 4 2-15z"></path><path d="M9 13l8-6"></path></svg>Telegram</a>
+</div>
+</div>
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 20px">
+<a href="tel:+251922147227" class="ft-cta" style="display: flex; flex-direction: column; gap: 4px; text-decoration: none; padding-bottom: 20px; border-bottom: 1px solid #DEDEDE">
+<span style="display: inline-flex; align-items: center; gap: 10px; font-size: clamp(22px, 2vw, 28px); letter-spacing: -0.02em; color: #2F6FBF">Call EXO<span aria-hidden="true" class="ft-arrow" style="width: 28px; height: 28px; border-radius: 999px; background: #2F6FBF; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></span></span>
+<span style="font-size: 13px; color: #6B6B6B">Let’s work together</span>
+</a>
+<a href="#get-in-touch" class="ft-cta" style="display: flex; flex-direction: column; gap: 4px; text-decoration: none">
+<span style="display: inline-flex; align-items: center; gap: 10px; font-size: clamp(22px, 2vw, 28px); letter-spacing: -0.02em; color: #111111">Book a visit<span aria-hidden="true" class="ft-arrow" style="width: 28px; height: 28px; border-radius: 999px; background: #111111; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></span></span>
+<span style="font-size: 13px; color: #6B6B6B">Appointments and enquiries</span>
+</a>
+</div>
+</div>
+<div aria-hidden="true" class="ft-word" style="margin-top: clamp(40px, 6vw, 96px); height: clamp(70px, 14.5vw, 210px); overflow: hidden; display: flex; justify-content: center">
+<span style="display: block; font-size: clamp(110px, 21vw, 300px); line-height: 0.78; font-weight: 600; letter-spacing: -0.075em; color: #111111; white-space: nowrap; transform: translateX(-0.03em)">exo talent</span>
+</div>
+</div>
+<div style="max-width: 1440px; margin: 0 auto; padding: 22px clamp(20px, 7vw, 104px) 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: #6B6B6B">
+<div style="display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center"><span>EXO Talent Consultancy ©[Year]</span><span aria-hidden="true">·</span><a href="#top" style="color: #6B6B6B; text-decoration: none">Privacy Policy</a></div>
+<div style="display: flex; gap: 14px; align-items: center"><span>Addis Ababa</span><span style="font-variant-numeric: tabular-nums">{{addisTime}}</span></div>
+</div>
+</footer>
+
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: 0, p: 0, wf: 0, vt: 1, vdir: '', vflip: false, tm: -1, ctab: 'msg', ctNote: '', menu: false };
+    this.form = {};
+    this.setField = (k) => (e) => { this.form[k] = e && e.target ? e.target.value : ''; };
+    this.setStatsEl = (el) => { this.statsEl = el; };
+    this.setWwdEl = (el) => { this.wwdEl = el; };
+    this.getWwd = () => this.wwdEl || document.getElementById('wwd-timeline');
+    this.setTex = (sy) => {
+      const t = document.getElementById('tex');
+      if (t) t.style.setProperty('--sy', Math.round(sy) + 'px');
+    };
+    this.applyVisible = (elTop, elH, visTop, visH) => {
+      if (visH <= 0) return;
+      const span = Math.max(1, elH - 128);
+      const center = (visTop - elTop) + visH / 2;
+      const f = Math.min(1, Math.max(0, (center - 64) / span));
+      if (Math.abs(f - this.state.wf) > 0.002) this.setState({ wf: f });
+    };
+    this.onScroll = () => {
+      if (this.scrollRaf) return;
+      this.scrollRaf = requestAnimationFrame(() => {
+        this.scrollRaf = null;
+        const el = this.getWwd();
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const top = Math.max(r.top, 0);
+        const bottom = Math.min(r.bottom, vh);
+        // only trust this when the page itself scrolls (content taller than this window)
+        if (document.documentElement.scrollHeight > vh + 4) {
+          this.applyVisible(r.top, r.height, top, bottom - top);
+          const w = document.getElementById('tex-wrap');
+          if (w) this.setTex(Math.max(0, -w.getBoundingClientRect().top));
+        }
+      });
+    };
+  }
+  componentDidMount() {
+    const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.clockTimer = setInterval(() => this.forceUpdate(), 30000);
+    document.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    window.addEventListener('resize', this.onScroll);
+    setTimeout(() => {
+      const el = this.getWwd();
+      if (el && typeof IntersectionObserver !== 'undefined') {
+        const th = [];
+        for (let k = 0; k <= 400; k++) th.push(k / 400);
+        this.wio = new IntersectionObserver((entries) => {
+          const e = entries[entries.length - 1];
+          if (!e.isIntersecting) return;
+          const b = e.boundingClientRect;
+          const v = e.intersectionRect;
+          this.applyVisible(b.top, b.height, v.top, v.height);
+        }, { threshold: th });
+        this.wio.observe(el);
+      }
+      const tw = document.getElementById('tex-wrap');
+      const reduceTex = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (tw && !reduceTex && typeof IntersectionObserver !== 'undefined') {
+        const th2 = [];
+        for (let k = 0; k <= 600; k++) th2.push(k / 600);
+        this.tio = new IntersectionObserver((entries) => {
+          const e = entries[entries.length - 1];
+          if (!e.isIntersecting) return;
+          this.setTex(Math.max(0, e.intersectionRect.top - e.boundingClientRect.top));
+        }, { threshold: th2 });
+        this.tio.observe(tw);
+      }
+      this.onScroll();
+    }, 0);
+    if (reduce || typeof IntersectionObserver === 'undefined' || !this.statsEl) { this.setState({ p: 1 }); return; }
+    this.io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { this.io.disconnect(); this.runCount(); }
+    }, { threshold: 0.35 });
+    this.io.observe(this.statsEl);
+  }
+  openTm(i, e) {
+    let top = 120;
+    try {
+      const sec = document.getElementById('team');
+      const card = e && e.currentTarget;
+      if (sec && card) {
+        const s = sec.getBoundingClientRect();
+        const c = card.getBoundingClientRect();
+        top = Math.max(24, c.top - s.top);
+      }
+    } catch (err) {}
+    this.setState({ tm: i, tmTop: top });
+  }
+  teamData() {
+    return [
+      { name: 'Wondwosson Mitiku', role: 'CEO & Managing Director', initials: 'WM' },
+      { name: 'Gillian Brewin', role: 'Co-Founder', initials: 'GB' },
+      { name: 'Ergibe Getachew', role: 'Chief Marketing Officer', initials: 'EG' },
+      { name: 'Samuel Abrham', role: 'Operations Officer', initials: 'SA' }
+    ];
+  }
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+    document.removeEventListener('scroll', this.onScroll, { capture: true });
+    if (this.wio) this.wio.disconnect();
+    if (this.clockTimer) clearInterval(this.clockTimer);
+    if (this.tio) this.tio.disconnect();
+    window.removeEventListener('resize', this.onScroll);
+    if (this.scrollRaf) cancelAnimationFrame(this.scrollRaf);
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+  runCount() {
+    const dur = 1800;
+    const t0 = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - t0) / dur);
+      this.setState({ p: 1 - Math.pow(1 - t, 3) });
+      if (t < 1) this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  renderVals() {
+    const faqData = [
+      { q: 'What kind of organisations do you work with?', a: '[Describe your typical clients: size, sector and the stage they are at when they call you.]' },
+      { q: 'How long does a typical engagement last?', a: '[Typical range, e.g. a focused diagnostic versus a longer implementation engagement.]' },
+      { q: 'How do you price your work?', a: '[Fixed-fee, retainer or day rate. Explain the model and what is included.]' },
+      { q: 'Do you stay involved after the strategy is set?', a: '[Explain how you support implementation and hand-over to the internal team.]' },
+      { q: 'What do you need from us to get started?', a: '[List the people, data and time commitment you need in the first two weeks.]' }
+    ];
+    const open = this.state.open;
+    return {
+      stats: [
+        { from: 1990, to: 2015, suffix: '', label: 'Founded to close the digital divide', isCalendar: true },
+        { from: 0, to: 10, suffix: '+', label: 'Years building skills in Addis Ababa', isGrowth: true },
+        { from: 0, to: 7, suffix: '', label: 'Core service areas', isPartner: true },
+        { from: 0, to: 4, suffix: '', label: 'Sectors of expertise', isSectors: true }
+      ].map((s) => ({ ...s, value: Math.round(s.from + (s.to - s.from) * this.state.p) + s.suffix })),
+      setStatsEl: this.setStatsEl,
+      menuOpen: this.state.menu,
+      menuExp: this.state.menu ? 'true' : 'false',
+      menuIcon: this.state.menu ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16',
+      toggleMenu: () => this.setState((st) => ({ menu: !st.menu })),
+      closeMenu: () => this.setState({ menu: false }),
+      addisTime: (() => { try { return new Date().toLocaleTimeString('en-US', { timeZone: 'Africa/Addis_Ababa', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } })(),
+      team: this.teamData().map((m, i) => ({ ...m, open: (e) => this.openTm(i, e) })),
+      tmTop: (this.state.tmTop || 120) + 'px',
+      noFocusScroll: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+      tmOpen: this.state.tm >= 0,
+      tmSel: this.teamData()[Math.max(0, this.state.tm)],
+      closeTm: () => this.setState({ tm: -1 }),
+      ctIsMsg: this.state.ctab === 'msg',
+      ctIsBook: this.state.ctab === 'book',
+      ctMsgSel: this.state.ctab === 'msg' ? 'true' : 'false',
+      ctBookSel: this.state.ctab === 'book' ? 'true' : 'false',
+      ctMsgBg: this.state.ctab === 'msg' ? '#FFFFFF' : 'transparent',
+      ctBookBg: this.state.ctab === 'book' ? '#FFFFFF' : 'transparent',
+      ctMsgColor: this.state.ctab === 'msg' ? '#111111' : '#6B6B6B',
+      ctBookColor: this.state.ctab === 'book' ? '#111111' : '#6B6B6B',
+      ctMsgShadow: this.state.ctab === 'msg' ? '0 2px 8px rgba(17,17,17,0.08)' : 'none',
+      ctBookShadow: this.state.ctab === 'book' ? '0 2px 8px rgba(17,17,17,0.08)' : 'none',
+      ctSendLabel: this.state.ctab === 'msg' ? 'Send message' : 'Request appointment',
+      ctNote: this.state.ctNote || 'Opens your email app with the details ready, or call us directly during business hours.',
+      tabMsg: () => this.setState({ ctab: 'msg', ctNote: '' }),
+      tabBook: () => this.setState({ ctab: 'book', ctNote: '' }),
+      onName: this.setField('name'),
+      onEmail: this.setField('email'),
+      onPhone: this.setField('phone'),
+      onMsg: this.setField('msg'),
+      onDate: this.setField('date'),
+      onTime: this.setField('time'),
+      onTopic: this.setField('topic'),
+      sendForm: () => {
+        const f = this.form;
+        if (!f.name || !f.email) { this.setState({ ctNote: 'Please add your name and email first.' }); return; }
+        const book = this.state.ctab === 'book';
+        const subject = book ? 'Appointment request from ' + f.name : 'Message from ' + f.name;
+        const lines = ['Name: ' + f.name, 'Email: ' + f.email];
+        if (f.phone) lines.push('Phone: ' + f.phone);
+        if (book) {
+          lines.push('Preferred date: ' + (f.date || '-'), 'Preferred time: ' + (f.time || '-'), 'Topic: ' + (f.topic || '-'));
+        } else {
+          lines.push('', f.msg || '');
+        }
+        const url = 'mailto:info@exotalentafrica.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+        try { window.open(url, '_blank'); } catch (e) {}
+        this.setState({ ctNote: 'Your email app should open with everything filled in. If it does not, email info@exotalentafrica.com.' });
+      },
+      vcards: (() => {
+        const voices = [
+          { title: 'Practical skills I use every day', quote: 'The digital learning program gave me practical skills I use every day, and the confidence to find real work.', name: 'Program graduate', role: 'Driving Digital Learning', initials: 'PG', avatarBg: '#4A90E2' },
+          { title: 'A plan that actually scaled', quote: 'EXO helped us secure funding and build a plan that actually scaled. Their enterprise support is hands-on and honest.', name: 'Founder', role: 'Local enterprise partner', initials: 'F', avatarBg: '#1A1A1A' },
+          { title: 'Bridged the gap', quote: 'The apprenticeship bridged the gap between school and the workplace. I started a job within weeks of finishing.', name: 'Apprentice', role: 'Skills & Job Creation', initials: 'A', avatarBg: '#7A8FA6' }
+        ];
+        const n = voices.length;
+        const t = this.state.vt;
+        const dir = this.state.vdir;
+        const anim = dir === '' ? '' : (dir === 'next' ? 'v-r' : 'v-l') + (this.state.vflip ? '2' : '1');
+        return [(t - 1 + n) % n, t, (t + 1) % n].map((idx, pos) => {
+          const on = pos === 1;
+          const order = dir === 'prev' ? 2 - pos : pos;
+          return {
+            ...voices[idx],
+            anim,
+            side: on ? '' : 'v-side',
+            delay: (order * 70) + 'ms',
+            bg: on ? '#FFFFFF' : 'rgba(255,255,255,0.55)',
+            shadow: on ? '0 18px 40px rgba(17,17,17,0.08)' : 'none',
+            scale: on ? '1' : '0.96',
+            opacity: on ? '1' : '0.85',
+            titleColor: on ? '#111111' : '#8A8A8A',
+            bodyColor: on ? '#3A3A3A' : '#8A8A8A'
+          };
+        });
+      })(),
+      prevV: () => this.setState((st) => ({ vt: (st.vt + 2) % 3, vdir: 'prev', vflip: !st.vflip })),
+      nextV: () => this.setState((st) => ({ vt: (st.vt + 1) % 3, vdir: 'next', vflip: !st.vflip })),
+      logos: ['[Client 01]','[Client 02]','[Client 03]','[Client 04]','[Client 05]','[Client 06]','[Client 07]','[Client 08]','[Client 09]','[Client 10]'].map((name) => ({ name })),
+      steps: [
+        { n: '01', title: 'Assess & onboard', body: 'We meet learners, communities, and enterprises where they are, mapping needs, gaps, and the opportunities ahead.' },
+        { n: '02', title: 'Build capability', body: 'Tailored digital, ICT, and enterprise programs turn capability into confidence through practical, applied learning.' },
+        { n: '03', title: 'Connect to opportunity', body: 'We link skills to apprenticeships, jobs, finance, and markets, converting capability into lasting livelihoods.' }
+      ],
+      wsteps: [
+        { n: '01', title: 'Driving Digital Learning', body: 'Empowering learners with practical digital skills, from mobile tools and online platforms to digital finance and online safety.', d1: 'M3 5h18v11H3z', d2: 'M8 20h8M12 16v4' },
+        { n: '02', title: 'Development & Skills Building', body: 'Empowering individuals through tailored skill-enhancement programs that build personal and professional capacity.', d1: 'M12 3l9 5-9 5-9-5 9-5z', d2: 'M3 13l9 5 9-5' },
+        { n: '03', title: 'Apprenticeship & Job Creation', body: 'Building skills, creating futures. Hands-on apprenticeships bridge education and employment through real workplace practice.', d1: 'M9 11a4 4 0 1 0 0-8a4 4 0 1 0 0 8z', d2: 'M2 21c1-4 4-6 7-6M15 17l2 2 4-4' },
+        { n: '04', title: 'Job Creation Support', body: 'Facilitating sustainable employment opportunities through strategic, industry-linked interventions and partnerships.', d1: 'M3 8h18v12H3z', d2: 'M9 8V5h6v3' },
+        { n: '05', title: 'Access to Finance Solutions', body: 'Empowering businesses with financial access and support: funding readiness, finance strategy, and resource planning.', d1: 'M4 20V10M10 20V4M16 20v-7', d2: 'M2 20h20' },
+        { n: '06', title: 'Enterprise Development Services', body: 'Supporting entrepreneurs in building successful enterprises, from idea validation to market entry and growth.', d1: 'M3 11l9-7 9 7', d2: 'M5 10v10h14V10' },
+        { n: '07', title: 'ICT Skills Training', body: 'Empowering individuals with advanced ICT skills and future-ready technical capability for the digital economy.', d1: 'M8 8l-4 4 4 4', d2: 'M16 8l4 4-4 4' }
+      ].map((s, i) => {
+        const cur = Math.round(this.state.wf * 6);
+        const on = cur === i;
+        const done = i <= cur;
+        return {
+          ...s,
+          iconLeft: i % 2 === 0,
+          side: i % 2 === 0 ? 'wd-a' : 'wd-b',
+          textLeft: i % 2 === 1,
+          rowBg: on ? '#F3F3F3' : 'rgba(243,243,243,0)',
+          tileBg: on ? '#1A1A1A' : '#FFFFFF',
+          tileColor: on ? '#FFFFFF' : '#111111',
+          tileBorder: on ? '#1A1A1A' : '#EAEAEA',
+          dotRing: done ? '#4A90E2' : '#E2E2E2',
+          dotFill: on ? '#4A90E2' : (done ? '#A9C9F0' : '#FFFFFF'),
+          pick: () => {
+            const row = document.getElementById('wwd-row-' + s.n);
+            if (row && row.scrollIntoView) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            this.setState({ wf: i / 6 });
+          }
+        };
+      }),
+      wlineH: 'calc((100% - 128px) * ' + this.state.wf.toFixed(4) + ')',
+      services: [
+        { n: '01', title: 'Strategy & positioning', body: 'Where to play, how to win and what to stop doing. Market entry, growth plans and competitive positioning.' },
+        { n: '02', title: 'Operations & process', body: 'Simplify how work gets done: structures, workflows and the metrics that keep them honest.' },
+        { n: '03', title: 'Digital transformation', body: 'Choose, plan and roll out the tools and systems that move the business forward.' },
+        { n: '04', title: 'Leadership advisory', body: 'A thinking partner for founders and executives facing high-stakes decisions.' }
+      ],
+      insights: [
+        { tag: 'Strategy', title: '[Article title: a sharp take on a problem your clients face]' },
+        { tag: 'Operations', title: '[Article title: a lesson learned from a recent engagement]' },
+        { tag: 'Leadership', title: '[Article title: a framework your team uses every week]' }
+      ],
+      faqs: faqData.map((f, i) => ({
+        ...f,
+        open: open === i,
+        expanded: open === i ? 'true' : 'false',
+        icon: open === i ? '−' : '+',
+        toggle: () => this.setState({ open: open === i ? -1 : i })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
